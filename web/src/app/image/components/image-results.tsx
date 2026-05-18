@@ -48,10 +48,10 @@ export function ImageResults({
 
   if (!selectedConversation) {
     return (
-      <div className="flex h-full min-h-[260px] items-center justify-center text-center sm:min-h-[420px]">
-        <div className="w-full max-w-4xl">
+      <div className="flex h-full min-h-[200px] items-center justify-center text-center sm:min-h-[420px]">
+        <div className="w-full max-w-4xl px-2">
           <h1
-            className="text-2xl font-semibold tracking-tight text-stone-950 sm:text-3xl md:text-5xl"
+            className="text-xl font-semibold tracking-tight text-stone-950 sm:text-3xl md:text-5xl"
             style={{
               fontFamily: '"Palatino Linotype","Book Antiqua","URW Palladio L","Times New Roman",serif',
             }}
@@ -59,7 +59,7 @@ export function ImageResults({
             Turn ideas into images
           </h1>
           <p
-            className="mx-auto mt-3 max-w-[280px] text-sm italic tracking-[0.01em] text-stone-500 sm:mt-4 sm:max-w-none sm:text-[15px]"
+            className="mx-auto mt-2 max-w-[260px] text-xs italic tracking-[0.01em] text-stone-500 sm:mt-4 sm:max-w-none sm:text-[15px]"
             style={{
               fontFamily: '"Palatino Linotype","Book Antiqua","URW Palladio L","Times New Roman",serif',
             }}
@@ -72,7 +72,7 @@ export function ImageResults({
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-[980px] flex-col gap-5 sm:gap-8">
+    <div className="mx-auto flex w-full max-w-[980px] flex-col gap-4 sm:gap-8">
       {selectedConversation.turns.map((turn, turnIndex) => {
         const referenceLightboxImages = turn.referenceImages.map((image, index) => ({
           id: `${turn.id}-reference-${index}`,
@@ -93,10 +93,10 @@ export function ImageResults({
         });
 
         return (
-          <div key={turn.id} className="flex flex-col gap-3 sm:gap-4">
+          <div key={turn.id} className="flex flex-col gap-2 sm:gap-4">
             <div className="flex justify-end">
-              <div className="max-w-[90%] px-1 py-1 text-[14px] leading-6 text-stone-900 sm:max-w-[82%] sm:text-[15px] sm:leading-7">
-                <div className="mb-1.5 flex flex-wrap justify-end gap-2 text-[11px] text-stone-400 sm:mb-2">
+              <div className="max-w-[92%] px-1 py-1 text-[13px] leading-5 text-stone-900 sm:max-w-[82%] sm:text-[15px] sm:leading-7">
+                <div className="mb-1 flex flex-wrap justify-end gap-1.5 text-[10px] text-stone-400 sm:mb-2 sm:gap-2 sm:text-[11px]">
                   <span>第 {turnIndex + 1} 轮</span>
                   <span>
                     {turn.mode === "edit" ? "编辑图" : "文生图"}
@@ -109,17 +109,17 @@ export function ImageResults({
             </div>
 
             <div className="flex justify-start">
-              <div className="w-full p-1">
+              <div className="w-full p-0.5 sm:p-1">
                 {turn.referenceImages.length > 0 ? (
-                  <div className="mb-4 flex flex-col items-end">
-                    <div className="mb-3 text-xs font-medium text-stone-500">本轮参考图</div>
-                    <div className="flex flex-wrap justify-end gap-3">
+                  <div className="mb-3 flex flex-col items-end sm:mb-4">
+                    <div className="mb-2 text-[11px] font-medium text-stone-500 sm:mb-3 sm:text-xs">本轮参考图</div>
+                    <div className="flex flex-wrap justify-end gap-2 sm:gap-3">
                       {turn.referenceImages.map((image, index) => (
-                        <div key={`${turn.id}-${image.name}-${index}`} className="flex flex-col items-end gap-2">
+                        <div key={`${turn.id}-${image.name}-${index}`} className="flex flex-col items-end gap-1.5 sm:gap-2">
                           <button
                             type="button"
                             onClick={() => onOpenLightbox(referenceLightboxImages, index)}
-                            className="group relative h-24 w-24 overflow-hidden border border-stone-200/80 bg-stone-100/60 text-left transition hover:border-stone-300"
+                            className="group relative h-20 w-20 overflow-hidden border border-stone-200/80 bg-stone-100/60 text-left transition hover:border-stone-300 sm:h-24 sm:w-24"
                             aria-label={`预览参考图 ${image.name || index + 1}`}
                           >
                             <img
@@ -131,10 +131,10 @@ export function ImageResults({
                           <Button
                             variant="outline"
                             size="sm"
-                            className="rounded-full border-stone-200 bg-white text-stone-700 hover:bg-stone-50"
+                            className="rounded-full border-stone-200 bg-white px-2 py-1 text-[11px] text-stone-700 hover:bg-stone-50 sm:px-3 sm:text-xs"
                             onClick={() => onContinueEdit(selectedConversation.id, image)}
                           >
-                            <Sparkles className="size-4" />
+                            <Sparkles className="size-3 sm:size-4" />
                             加入编辑
                           </Button>
                         </div>
@@ -143,15 +143,15 @@ export function ImageResults({
                   </div>
                 ) : null}
 
-                <div className="mb-3 flex flex-wrap items-center gap-1.5 text-[11px] text-stone-500 sm:mb-4 sm:gap-2 sm:text-xs">
-                  <span className="rounded-full bg-stone-100 px-3 py-1">{turn.count} 张</span>
-                  <span className="rounded-full bg-stone-100 px-3 py-1">{getTurnStatusLabel(turn.status)}</span>
+                <div className="mb-2 flex flex-wrap items-center gap-1 text-[10px] text-stone-500 sm:mb-4 sm:gap-2 sm:text-xs">
+                  <span className="rounded-full bg-stone-100 px-2 py-0.5 sm:px-3 sm:py-1">{turn.count} 张</span>
+                  <span className="rounded-full bg-stone-100 px-2 py-0.5 sm:px-3 sm:py-1">{getTurnStatusLabel(turn.status)}</span>
                   {turn.status === "queued" ? (
-                    <span className="rounded-full bg-amber-50 px-3 py-1 text-amber-700">等待当前对话中的前序任务完成</span>
+                    <span className="rounded-full bg-amber-50 px-2 py-0.5 text-amber-700 sm:px-3 sm:py-1">等待当前对话中的前序任务完成</span>
                   ) : null}
                 </div>
 
-                <div className="columns-1 gap-3 space-y-3 sm:columns-2 sm:gap-4 sm:space-y-4 xl:columns-3">
+                <div className="columns-1 gap-2 space-y-2 sm:columns-2 sm:gap-4 sm:space-y-4 xl:columns-3">
                   {turn.images.map((image, index) => {
                     const imageSrc = image.status === "success" ? getStoredImageSrc(image) : "";
                     if (image.status === "success" && imageSrc) {
@@ -183,18 +183,18 @@ export function ImageResults({
                               }}
                             />
                           </button>
-                          <div className="flex items-center justify-between gap-2 px-3 py-3">
-                            <div className="min-w-0 text-xs text-stone-500">
+                          <div className="flex items-center justify-between gap-2 px-2 py-2 sm:px-3 sm:py-3">
+                            <div className="min-w-0 text-[11px] text-stone-500 sm:text-xs">
                               <span>结果 {index + 1}</span>
-                              {imageMeta ? <span className="ml-2 text-stone-400">{imageMeta}</span> : null}
+                              {imageMeta ? <span className="ml-1.5 text-stone-400 sm:ml-2">{imageMeta}</span> : null}
                             </div>
                             <Button
                               variant="outline"
                               size="sm"
-                              className="rounded-full border-stone-200 bg-white text-stone-700 hover:bg-stone-50"
+                              className="rounded-full border-stone-200 bg-white px-2 py-1 text-[11px] text-stone-700 hover:bg-stone-50 sm:px-3 sm:text-xs"
                               onClick={() => onContinueEdit(selectedConversation.id, image)}
                             >
-                              <Sparkles className="size-4" />
+                              <Sparkles className="size-3 sm:size-4" />
                               加入编辑
                             </Button>
                           </div>
@@ -207,7 +207,7 @@ export function ImageResults({
                         <div
                           key={image.id}
                           className={cn(
-                            "break-inside-avoid overflow-hidden rounded-2xl border border-rose-200 bg-rose-50 sm:rounded-none",
+                            "break-inside-avoid overflow-hidden rounded-xl border border-rose-200 bg-rose-50 sm:rounded-2xl",
                             turn.size === "1:1" && "sm:aspect-square",
                             turn.size === "16:9" && "sm:aspect-video",
                             turn.size === "9:16" && "sm:aspect-[9/16]",
@@ -216,7 +216,7 @@ export function ImageResults({
                             !["1:1", "16:9", "9:16", "4:3", "3:4"].includes(turn.size) && "sm:aspect-square",
                           )}
                         >
-                          <div className="flex h-full min-h-16 items-center justify-center px-4 py-4 text-center text-sm leading-6 text-rose-600 sm:px-6 sm:py-8">
+                          <div className="flex h-full min-h-14 items-center justify-center px-3 py-4 text-center text-xs leading-5 text-rose-600 sm:min-h-16 sm:px-6 sm:py-8 sm:text-sm sm:leading-6">
                             {image.error || "生成失败"}
                           </div>
                         </div>
@@ -236,15 +236,15 @@ export function ImageResults({
                           !["1:1", "16:9", "9:16", "4:3", "3:4"].includes(turn.size) && "aspect-square",
                         )}
                       >
-                        <div className="flex h-full flex-col items-center justify-center gap-3 px-6 py-8 text-center text-stone-500">
-                          <div className="rounded-full bg-white p-3 shadow-sm">
+                        <div className="flex h-full flex-col items-center justify-center gap-2 px-4 py-6 text-center text-stone-500 sm:gap-3 sm:px-6 sm:py-8">
+                          <div className="rounded-full bg-white p-2.5 shadow-sm sm:p-3">
                             {turn.status === "queued" ? (
-                              <Clock3 className="size-5" />
+                              <Clock3 className="size-4 sm:size-5" />
                             ) : (
-                              <LoaderCircle className="size-5 animate-spin" />
+                              <LoaderCircle className="size-4 animate-spin sm:size-5" />
                             )}
                           </div>
-                          <p className="text-sm">{turn.status === "queued" ? "已加入当前对话队列..." : "正在处理图片..."}</p>
+                          <p className="text-xs sm:text-sm">{turn.status === "queued" ? "已加入当前对话队列..." : "正在处理图片..."}</p>
                         </div>
                       </div>
                     );
@@ -252,7 +252,7 @@ export function ImageResults({
                 </div>
 
                 {turn.status === "error" && turn.error ? (
-                  <div className="mt-4 border-l-2 border-amber-300 bg-amber-50/70 px-4 py-3 text-sm leading-6 text-amber-700">
+                  <div className="mt-3 border-l-2 border-amber-300 bg-amber-50/70 px-3 py-2 text-xs leading-5 text-amber-700 sm:mt-4 sm:px-4 sm:py-3 sm:text-sm sm:leading-6">
                     {turn.error}
                   </div>
                 ) : null}

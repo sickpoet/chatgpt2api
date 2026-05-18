@@ -529,12 +529,26 @@ def stream_image_outputs(
             )
         else:
             image_urls = item
+    # Deduplicate: limit to 1 image per conversation (pool handles n>1)
+    # and remove duplicate URLs
+    if image_urls:
+        seen_content_hashes: set[str] = set()
+        unique_urls: list[str] = []
+        for url in image_urls:
+            if url not in unique_urls:
+                unique_urls.append(url)
+        image_urls = unique_urls[:1]
     if image_urls:
         data: list[dict[str, Any]] = []
         for img_url in image_urls:
             response = backend.session.get(img_url, timeout=120)
             ensure_ok(response, "image_download")
             image_data = response.content
+            # Content-level dedup: skip if identical image already processed
+            content_hash = hashlib.md5(image_data).hexdigest()
+            if content_hash in seen_content_hashes:
+                continue
+            seen_content_hashes.add(content_hash)
             saved_url = save_image_bytes(image_data, request.base_url)
             revised_prompt = request.prompt
             if request.response_format == "b64_json":

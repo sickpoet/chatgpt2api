@@ -87,7 +87,7 @@ export function ImageComposer({
   };
 
   return (
-    <div className="shrink-0 flex justify-center px-1 sm:px-0">
+    <div className="shrink-0 flex justify-center px-0 sm:px-0">
       <div style={{ width: "min(980px, 100%)" }}>
         <input
           ref={fileInputRef}
@@ -135,7 +135,7 @@ export function ImageComposer({
           </div>
         ) : null}
 
-        <div className="rounded-[24px] border border-stone-200 bg-white shadow-[0_14px_60px_-42px_rgba(15,23,42,0.45)] sm:rounded-[32px] sm:shadow-none">
+        <div className="rounded-[20px] border border-stone-200 bg-white shadow-[0_14px_60px_-42px_rgba(15,23,42,0.45)] sm:rounded-[32px] sm:shadow-none">
           <div
             className="relative cursor-text"
             onClick={() => {
@@ -165,10 +165,10 @@ export function ImageComposer({
                   void onSubmit();
                 }
               }}
-              className="min-h-[82px] resize-none rounded-[24px] border-0 bg-transparent px-4 pt-4 pb-2 text-[15px] leading-6 text-stone-900 shadow-none placeholder:text-stone-400 focus-visible:ring-0 sm:min-h-[148px] sm:rounded-[32px] sm:px-6 sm:pt-6 sm:pb-20 sm:leading-7"
+              className="min-h-[72px] resize-none rounded-[20px] border-0 bg-transparent px-3 pt-3 pb-2 text-[15px] leading-6 text-stone-900 shadow-none placeholder:text-stone-400 focus-visible:ring-0 sm:min-h-[148px] sm:rounded-[32px] sm:px-6 sm:pt-6 sm:pb-20 sm:leading-7"
             />
 
-            <div className="border-t border-stone-100 bg-white px-3 pb-3 pt-2 sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-t-0 sm:bg-gradient-to-t sm:from-white sm:via-white/95 sm:to-transparent sm:px-6 sm:pb-4 sm:pt-6" onClick={(event) => event.stopPropagation()}>
+            <div className="border-t border-stone-100 bg-white px-2.5 pb-2.5 pt-2 sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-t-0 sm:bg-gradient-to-t sm:from-white sm:via-white/95 sm:to-transparent sm:px-6 sm:pb-4 sm:pt-6" onClick={(event) => event.stopPropagation()}>
               <div className="flex items-end justify-between gap-2 sm:gap-3">
                 <div className="hide-scrollbar flex min-w-0 flex-1 flex-nowrap items-center gap-1.5 overflow-x-auto pb-0.5 sm:flex-wrap sm:gap-3 sm:overflow-visible sm:pb-0">
                   <Button
@@ -216,7 +216,7 @@ export function ImageComposer({
                       <ChevronDown className={cn("size-4 shrink-0 opacity-60 transition", isSizeMenuOpen && "rotate-180")} />
                     </button>
                     {isSizeMenuOpen ? (
-                      <div className="fixed inset-x-4 bottom-[calc(env(safe-area-inset-bottom)+5.75rem)] z-[80] max-h-[45dvh] overflow-y-auto rounded-3xl border border-white/80 bg-white p-2 shadow-[0_24px_80px_-32px_rgba(15,23,42,0.35)] sm:absolute sm:inset-x-auto sm:bottom-[calc(100%+10px)] sm:left-0 sm:w-[186px]">
+                      <div className="fixed inset-x-3 bottom-[calc(env(safe-area-inset-bottom)+5.5rem)] z-[80] max-h-[45dvh] overflow-y-auto rounded-2xl border border-white/80 bg-white p-2 shadow-[0_24px_80px_-32px_rgba(15,23,42,0.35)] sm:absolute sm:inset-x-auto sm:bottom-[calc(100%+10px)] sm:left-0 sm:w-[186px] sm:rounded-3xl">
                         {imageSizeOptions.map((option) => {
                           const active = option.value === imageSize;
                           return (
@@ -224,7 +224,7 @@ export function ImageComposer({
                               key={option.label}
                               type="button"
                               className={cn(
-                                "flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-sm text-stone-700 transition hover:bg-stone-100",
+                                "flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm text-stone-700 transition hover:bg-stone-100 sm:rounded-2xl",
                                 active && "bg-stone-100 font-medium text-stone-950",
                               )}
                               onClick={() => {
@@ -260,4 +260,3 @@ export function ImageComposer({
     </div>
   );
 }
-
